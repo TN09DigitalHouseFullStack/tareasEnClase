@@ -7,8 +7,23 @@ let archivoTareas = {
         let auxJSONtareas = JSON.parse(auxTareas)
         return auxJSONtareas;
     },
-    guardar,
-    escribir,
-    filtrar
+
+    escribirJSON: function(tareas){
+        let auxTareas = JSON.stringify(tareas, null, ' ');
+        return fs.writeFileSync(this.archivo, auxTareas)
+    },
+
+    guardarTareas: function(tarea){
+        //aquì llamo a leer
+        let tareas = this.leerArchivo();
+        //aquí hago un push al array
+        tareas.push(tarea);
+        //aquí llamo a escribir
+        this.escribirJSON(tareas);
+    }
+
 }
+
+
+
 module.exports = archivoTareas;
